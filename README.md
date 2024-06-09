@@ -14,7 +14,7 @@ curl -s -o ~/x https://raw.githubusercontent.com/olegos2/mobox/main/install && .
 
 - 在线围棋魔方小游戏
 
-- 视频按帧率提取图片
+- 收益利率实时计算器
   
 - 文本正则查找替换等功能
   
