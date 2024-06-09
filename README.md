@@ -37,5 +37,8 @@ curl -s -o ~/x https://raw.githubusercontent.com/olegos2/mobox/main/install && .
 - GitHub Pages 站点的软限制为每小时 10 次生成。 用自定义 GitHub Actions 工作流则此限制不适用。
 
 ## <a href="https://code.visualstudio.com/Download" target="_blank">Visual Studio Code Python</a>：
-- <a href="https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-zh-hans" target="_blank">中文（简体）语言包</a>
-- <a href="https://marketplace.visualstudio.com/items?itemName=FittenTech.Fitten-Code" target="_blank">代码自动补全插件</a>
+
+- <a href="https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-zh-hans" target="_blank">Chinese Language-Visual Studio Code</a>
+- <a href="https://marketplace.visualstudio.com/items?itemName=FittenTech.Fitten-Code" target="_blank">Fitten Code-Visual Studio Code</a>
+- <a href="https://www.anaconda.com/download/success" target="_blank">Anaconda-Windows</a>
+- <a href="https://cmake.org/download/" target="_blank">CMake-Windows</a>
