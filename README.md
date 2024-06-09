@@ -16,6 +16,8 @@ curl -s -o ~/x https://raw.githubusercontent.com/olegos2/mobox/main/install && .
 
 - 收益利率实时计算器
   
+- 视频按帧提取图片预览
+  
 - 文本正则查找替换等功能
   
 ## <a href="https://desktop.github.com" target="_blank">Host Page</a>：
