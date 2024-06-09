@@ -439,8 +439,8 @@
 </div>
 
 
-  
- <div style="text-align:center;height:20px;">
+     <div class="panel" style="margin-bottom:10px; margin-top:10px;margin-left:90px;margin-right:90px;">
+ <div style="text-align: center; height: auto !important;">
 
     <div class="container">
         <textarea id="base64Input" placeholder="Paste Base64 data URI here..."></textarea>
@@ -515,7 +515,7 @@
 
 
 
-
+ <div style="text-align: center; height: auto !important;">
 <div class="container">
 <div id="imageDisplayContainer" class="image-display-container">
 <img id="displayedImage" src="" alt="Converted Image" onclick="showNextImage()">
@@ -530,9 +530,11 @@
 <input type="file" id="videoInput" accept="video/*">
 <input type="number" id="intervalInput" value="1">
 <button class="button2" id="convertButton">视频转图片-每秒查看帧数</button>
-
-
 </div>
+</div>
+
+
+    
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
@@ -705,37 +707,7 @@ return number < 10 ? '0' + number : number.toString();
 }
 });
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
-        
+</div>
 
     <!-- #content -->
     <footer id="colophon" class="site-footer" role="contentinfo">
