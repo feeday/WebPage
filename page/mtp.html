@@ -30,7 +30,6 @@ margin: 10px;
 #intervalSecondsInput,
 .button,
 .button2 {
-/* 添加 #intervalInput */
 display: block;
 margin: 10px auto;
 padding: 10px;
@@ -112,6 +111,9 @@ var totalDuration;
 var video;
 var images = [];
 var currentImageIndex = -1;
+
+// 初始化按钮状态
+resetUI();
 
 // 添加事件监听器
 prevButton.addEventListener('click', showPreviousImage);
@@ -223,6 +225,9 @@ imageContainer.style.display = 'block';
 prevButton.style.display = 'inline-block';
 nextButton.style.display = 'inline-block';
 returnButton.style.display = 'inline-block';
+convertButton.style.display = 'none'; // 隐藏转换按钮
+fileInput.style.display = 'none'; // 隐藏文件输入
+intervalInput.style.display = 'none'; // 隐藏间隔输入
 }
 }
 
@@ -245,7 +250,10 @@ document.getElementById('imageDisplayContainer').style.display = 'none';
 prevButton.style.display = 'none';
 nextButton.style.display = 'none';
 returnButton.style.display = 'none';
-convertButton.textContent = '视频转图片按秒查看浏览';
+convertButton.textContent = '视频转图片-每秒查看帧数';
+convertButton.style.display = 'inline-block'; // 显示转换按钮
+fileInput.style.display = 'inline-block'; // 显示文件输入
+intervalInput.style.display = 'inline-block'; // 显示间隔输入
 images = [];
 currentImageIndex = -1;
 }
@@ -267,3 +275,4 @@ return number < 10 ? '0' + number : number.toString();
 </body>
 
 </html>
+
