@@ -438,22 +438,38 @@
     <div style="text-align:center;height:20px;">
 </div>
 
-
-     <div class="panel" style="margin-bottom:10px; margin-top:10px;margin-left:90px;margin-right:90px;">
- <div style="text-align: center; height: auto !important;">
-
-    <div class="container">
-        <textarea id="base64Input" placeholder="Paste Base64 data URI here..."></textarea>
-        <div class="button-group">
-            <input type="file" id="fileInput" accept="image/*,audio/*,video/*">
-            <button onclick="convertToBase64()">文件转编码</button>
-            <button onclick="convertFromBase64()">编码转文件</button>
-            <button onclick="clearOutput()">清空编码</button>
+   <div class="panel" style="width: 48%; float: left; margin-left: 2%; margin-right: 2%;">
+        <div class="container">
+            <textarea id="base64Input" placeholder="Paste Base64 data URI here..." style="width: 100%; height: 100px;"></textarea>
+            <div class="button-group">
+                <input type="file" id="fileInput" accept="image/*,audio/*,video/*">
+                <button onclick="convertToBase64()">文件转编码</button>
+                <button onclick="convertFromBase64()">编码转文件</button>
+                <button onclick="clearOutput()">清空编码</button>
+            </div>
+            <div class="output" id="output"></div>
         </div>
-        <div class="output" id="output"></div>
     </div>
-</div>
-    <script>
+
+    <div class="panel" style="width: 48%; float: right; margin-left: 2%; margin-right: 2%;">
+        <div class="container">
+            <div id="imageDisplayContainer" class="image-display-container">
+                <img id="displayedImage" src="" alt="Converted Image" onclick="showNextImage()">
+                <div id="imageTimeLabel" class="image-time"></div>
+                <div class="button-container">
+                    <button id="prevButton" class="button">上帧</button>
+                    <button id="returnButton" class="button">清除</button>
+                    <button class="button" onclick="window.open('https://xiangyuecn.github.io/Recorder/', '_blank')">录音</button>
+                    <button id="nextButton" class="button">下帧</button>
+                </div>
+            </div>
+            <input type="file" id="videoInput" accept="video/*">
+            <input type="number" id="intervalInput" value="1">
+            <button class="button2" id="convertButton">视频转图片-每秒查看帧数</button>
+        </div>
+    </div>
+
+  <script>
         function convertFromBase64() {
             const base64Input = document.getElementById('base64Input').value.trim();
             const output = document.getElementById('output');
@@ -513,28 +529,6 @@
         }
     </script>
 
-
-
- <div style="text-align: center; height: auto !important;">
-<div class="container">
-<div id="imageDisplayContainer" class="image-display-container">
-<img id="displayedImage" src="" alt="Converted Image" onclick="showNextImage()">
-<div id="imageTimeLabel" class="image-time"></div>
-<div class="button-container">
-<button id="prevButton" class="button">上帧</button>
-<button id="returnButton" class="button">清除</button>
-<button class="button" onclick="window.open('https://xiangyuecn.github.io/Recorder/', '_blank')">录音</button>
-<button id="nextButton" class="button">下帧</button>
-</div>
-</div>
-<input type="file" id="videoInput" accept="video/*">
-<input type="number" id="intervalInput" value="1">
-<button class="button2" id="convertButton">视频转图片-每秒查看帧数</button>
-</div>
-</div>
-
-
-    
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
@@ -707,7 +701,7 @@ return number < 10 ? '0' + number : number.toString();
 }
 });
 </script>
-</div>
+
 
     <!-- #content -->
     <footer id="colophon" class="site-footer" role="contentinfo">
