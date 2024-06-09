@@ -1,0 +1,430 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>─=≡Σ((( つ•̀ω•́)つ</title>
+<head>
+    <style>
+        body, textarea, input, button {
+            font-family: Arial, sans-serif; /* 统一字体 */
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        #textarea, .input-group input {
+            width: 97%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 5px auto;
+            display: block;
+            height: 100px;
+        }
+        #stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-size: 5px;
+    padding: 5px;
+    background-color: #eee;
+    border-radius: 5px;
+}
+        .button {
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #5fe58d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .input-group {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+    </style>
+    
+    </head>
+    <body>
+    
+<textarea id="textarea" placeholder="自由不是无限制，而是在规则中放飞自我。"></textarea>
+        <div id="stats" style="width: 90%; padding: 5px; margin: 0 auto;">
+            <div id="total">总数：0</div>
+            <div id="chinese">汉字：0</div>
+            <div id="punctuation">标点：0</div>
+            <div id="alphabet">字母：0</div>
+            <div id="numbers">数字：0</div>
+            <div id="duplicate">重复：0</div>
+            
+        </div>
+    <div style="height:1px;"></div>
+
+     
+        <div class="input-group">
+            <button class="button" id="clear-btn">清空</button>
+            <button class="button" id="openkey-btn"  data-api-url="https://openkey.cloud/v1/chat/completions">测试</button>
+            <button class="button" id="remove-duplicates-btn" >去重</button>
+            <button class="button" id="copy-btn" >复制</button>
+              <div id="myDiv" style="display: none;">
+                                <button class="button" id="gpt-35-btn" data-api-url="https://puck.host/v1/chat/completions" data-model="gpt-3.5-turbo">算</button>
+            <button class="button" id="replace-btn" >替</button>
+            <button class="button" id="preserve-matches-btn" >保</button>
+            <button class="button" id="regex-replace-btn" >正</button>
+        </div>
+        </div>
+        <div id="myDiv" style="display: none;"><div id="replace-count">替换：0</div>
+            <div id="regex-replace-count">正则：0</div>
+   <div class="input-group" style="display: flex; white-space: nowrap; overflow: hidden; width: 95%; padding: 5px; margin: 0 auto;">
+            <input id="search-input" style="flex-grow: 1; margin-right: 5px; width: 30px; height: 15px;"  placeholder="输入要查找的文本" value='https?:\/\/[^\s/$.?#]+[^\s]*?(?=")'>
+            <input id="replace-input" style="flex-grow: 1; margin-right: 5px; width: 30px; height: 15px;" placeholder="输入要替换的文本">
+            <input type="text" class="form-control mx-3" style="flex-grow: 1; width: 30px; height: 15px;" id="api_key" name="api_key" placeholder="sk-IeIcofyxWZS31Fq41295Bd3f924f4d409373Fc1dBbD19a9a">
+        </div>  </div>
+        <div class="search-container"></div>
+        <div class="input-group">
+            <!-- 隐藏的 API 密钥输入框，已设定默认值 -->
+            <input type="text" class="form-control" id="api_key" name="api_key" placeholder="sk-IeIcofyxWZS31Fq41295Bd3f924f4d409373Fc1dBbD19a9a" style="display:none;">  
+        </div>
+
+
+ </div>
+  
+        <script>
+            const textarea = document.getElementById("textarea");
+            const searchInput = document.getElementById("search-input");
+            const replaceInput = document.getElementById("replace-input");
+            const replaceBtn = document.getElementById("replace-btn");
+            const regexReplaceBtn = document.getElementById("regex-replace-btn");
+            const clearBtn = document.getElementById("clear-btn");
+            const removeDuplicatesBtn = document.getElementById("remove-duplicates-btn");
+            const totalEl = document.getElementById("total");
+            const chineseEl = document.getElementById("chinese");
+            const punctuationEl = document.getElementById("punctuation");
+            const alphabetEl = document.getElementById("alphabet");
+            const numbersEl = document.getElementById("numbers");
+            const duplicateEl = document.getElementById("duplicate");
+            
+            const textarea2 = document.getElementById("textarea");
+            const copyBtn = document.getElementById("copy-btn");
+            
+            textarea.addEventListener("input", updateStats);
+            clearBtn.addEventListener("click", clearTextarea);
+            removeDuplicatesBtn.addEventListener("click", removeDuplicates);
+            replaceBtn.addEventListener("click", replaceText);
+            regexReplaceBtn.addEventListener("click", replaceTextUsingRegex);
+            
+            function updateStats() {
+              const text = textarea.value;
+              const total = text.length;
+              const chinese = text.match(/[\u4e00-\u9fa5]/g)?.length || 0;
+              const punctuation = text.match(/[^\u4e00-\u9fa5\w]/g)?.length || 0;
+              const alphabet = text.match(/[a-zA-Z]/g)?.length || 0;
+              const numbers = text.match(/\d/g)?.length || 0;
+            
+              totalEl.textContent = `总数：${total}`;
+              chineseEl.textContent = `汉字：${chinese}`;
+              punctuationEl.textContent = `标点：${punctuation}`;
+              alphabetEl.textContent = `字母：${alphabet}`;
+              numbersEl.textContent = `数字：${numbers}`;
+            }
+            
+            function clearTextarea() {
+              textarea.value = "";
+              updateStats();
+            }
+            
+            // 去重处理
+            function removeDuplicates() {
+              const text = textarea.value;
+              const textList = text.split("\n"); // 假设文本项以换行符分隔
+              
+              const uniqueList = [...new Set(textList)];
+              const duplicateCount = textList.length - uniqueList.length;
+              duplicateEl.textContent = `重复：${duplicateCount}`;
+              
+              textarea.value = uniqueList.join("\n"); // 更新文本框内容
+              updateStats(); // 更新统计信息
+            }
+            
+            document.addEventListener('DOMContentLoaded', function() {
+                document.getElementById("preserve-matches-btn").addEventListener("click", function() {
+                    const searchValue = document.getElementById("search-input").value;
+                    const text = document.getElementById("textarea").value;
+                    
+                    try {
+                        const regex = new RegExp(searchValue, 'g');
+                        let matches = text.match(regex);
+            
+                        // 只有当找到匹配项时，才更新文本区域的内容
+                        if (matches && matches.length > 0) {
+                            // 将匹配到的内容保留，并用换行符连接成新的字符串
+                            const newText = matches.join("\n");
+                            document.getElementById("textarea").value = newText;
+            
+                            // 更新匹配项数量显示
+                            updateRegexReplaceCount(matches.length);
+                        } else {
+                            // 如果没有找到匹配项，则不清空文本区域，可能需要给用户一些反馈
+                            console.log("没有找到匹配项。");
+                            // 保持匹配项数量显示为0
+                            updateRegexReplaceCount(0);
+                        }
+                    } catch (e) {
+                        alert("正则表达式有误: " + e.message);
+                    }
+                });
+            });
+            
+            function updateRegexReplaceCount(matchCount) {
+                document.getElementById("regex-replace-count").textContent = `正则：${matchCount}`;
+            }
+            
+            
+            function replaceText() {
+                const searchValue = searchInput.value;
+                const replaceValue = replaceInput.value;
+                const text = textarea.value;
+            
+                if (searchValue !== "") {
+                    const matches = text.match(new RegExp(searchValue, 'g'));
+                    const replaceCount = matches ? matches.length : 0; // 计算匹配项的次数
+            
+                    const newText = text.replaceAll(searchValue, replaceValue);
+                    document.getElementById("replace-count").textContent = `替换：${replaceCount}`;
+                    textarea.value = newText;
+                    updateStats();
+                }
+            }
+            
+                    function replaceTextUsingRegex() {
+                        const searchValue = searchInput.value;
+                        const replaceValue = replaceInput.value;
+                        const text = textarea.value;
+            
+                        if (searchValue !== "") {
+                            let newText;
+                            let matchCount = (text.match(new RegExp(searchValue, 'g')) || []).length;
+                            try {
+                                newText = text.replace(new RegExp(searchValue, 'g'), replaceValue);
+                            } catch (e) {
+                                alert("正则表达式有误: " + e.message);
+                                return;
+                            }
+                            document.getElementById("regex-replace-count").textContent = `正则：${matchCount}`;
+                            textarea.value = newText;
+                            updateStats();
+                        }
+                    }
+            
+                    document.getElementById('api_key').addEventListener('blur', function() {
+                var value = this.value.trim();
+                if (!value) {
+                    console.log("使用placeholder值作为默认值: " + this.placeholder);
+                } else {
+                    console.log("用户输入的值: " + value);
+                }
+            });
+            
+            let apiUrl = ""; // 初始化为空
+            
+            document.getElementById("openkey-btn").addEventListener("click", function() {
+                apiUrl = this.getAttribute("data-api-url");
+                testAPI(); // 调用API测试函数
+            });
+            
+            function testAPI() {
+                if (!apiUrl) {
+                    alert("请选择一个API URL");
+                    return;
+                }
+            
+                const inputField = document.getElementById('api_key');
+                const originalInput = document.getElementById('textarea') ? document.getElementById('textarea').value : '';
+                if (document.getElementById('textarea')) {
+                    document.getElementById('textarea').value = "请稍后...";
+                }
+                // 如果输入框为空，则使用placeholder的值；如果不为空，则使用用户输入的值
+                const apiKey = inputField.value.trim() || inputField.placeholder;
+            
+                const data = {
+                    model: "gpt-3.5-turbo",
+                    messages: [
+                        { role: "system", content: "You are a helpful assistant." },
+                        { role: "user", content: originalInput }
+                    ]
+                };
+            
+                const xhr = new XMLHttpRequest();
+                xhr.open("POST", apiUrl, true);
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.setRequestHeader("Authorization", `Bearer ${apiKey}`);
+            
+                xhr.onreadystatechange = function() {
+                    if (this.readyState === XMLHttpRequest.DONE) {
+                        if (this.status === 200) {
+                            const response = JSON.parse(this.responseText);
+                            if (document.getElementById('textarea')) {
+                                document.getElementById('textarea').value = response.choices[0].message.content;
+                            }
+                            // updateStats(); // 更新统计信息，根据需要启用
+                        } else {
+                            if (document.getElementById('textarea')) {
+                                document.getElementById('textarea').value = "请求失败，请检查您的API密钥和其他设置。";
+                            }
+                        }
+                    }
+                };
+            
+                xhr.send(JSON.stringify(data));
+            }	
+                copyBtn.addEventListener("click", function() {
+                let textToCopy;
+                if (textarea.value === "") {
+                    // 按行分割占位符，然后用换行符连接
+                    textToCopy = textarea2.getAttribute("placeholder").split("*").join("*\n");
+                } else {
+                    textToCopy = textarea2.value;
+                }
+                
+                const tempInput = document.createElement("textarea"); // 使用文本区域代替输入来支持多行
+                document.body.appendChild(tempInput);
+                tempInput.value = textToCopy;
+                tempInput.select();
+                document.execCommand("copy");
+                document.body.removeChild(tempInput);
+                //alert("文本已复制到剪贴板!");
+            });
+            const pasteBtn = document.getElementById("paste-btn");
+            
+            pasteBtn.addEventListener("click", function() {
+                navigator.clipboard.readText()
+                .then(clipText => {
+                    textarea.value = clipText;
+                    updateStats();
+                    //alert("文本已从剪贴板粘贴!");
+                }).catch(err => {
+                    //alert('粘贴失败：' + err);
+                });
+            });
+            </script>
+            <script>
+                function formatHTML(input) {
+                    let formatted = '';
+                    let pad = 0;
+                    const tags = ['<p>', '</p>', '<div>', '</div>', '<span>', '</span>', '<br>', '<br/>']; // 这只是一个简化的标签列表，你可以添加更多的标签
+            
+                    input.split(/\r?\n/).forEach(line => {
+                        let indent = 0;
+            
+                        tags.forEach(tag => {
+                            if (line.includes(tag)) {
+                                if (tag.startsWith('</')) {
+                                    pad -= 1;
+                                }
+                            }
+                        });
+            
+                        for (let i = 0; i < pad; i++) {
+                            indent += 4;
+                        }
+            
+                        formatted += ' '.repeat(indent) + line.trim() + '\n';
+            
+                        tags.forEach(tag => {
+                            if (line.includes(tag)) {
+                                if (!tag.startsWith('</')) {
+                                    pad += 1;
+                                }
+                            }
+                        });
+                    });
+            
+                    return formatted;
+                }
+            
+                function formatAndPreview() {
+                    const code = document.getElementById('textarea').value;
+                    const formattedCode = formatHTML(code);
+                    document.getElementById('textarea').value = formattedCode;
+                    
+                    const newWindow = window.open("", "Preview Window", "width=600,height=600");
+                    newWindow.document.write(code);
+                    newWindow.document.close();
+                }
+            </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const textarea = document.getElementById("textarea");
+
+            document.getElementById('clear-btn').addEventListener('click', function() {
+    document.getElementById('textarea').value = ''; // 直接清空<textarea>的内容
+});
+      
+            // GPT3 和 GPT4 提问按钮的逻辑
+            document.querySelectorAll(".button").forEach(button => {
+                if (button.id === "gpt-35-btn" || button.id === "gpt-4-btn") {
+                    button.addEventListener("click", function() {
+                        let model = this.dataset.model;
+                        testAPI(model);
+                    });
+                }
+            });
+        
+            function testAPI(model) {
+                const apiUrl = "https://puck.host/v1/chat/completions";
+                const apiKey = document.getElementById('api_key').placeholder; // 使用placeholder作为默认API密钥
+                let originalInput = textarea.value.trim();
+        
+                if (!originalInput) {
+                    alert("请输入一些文本...");
+                    return;
+                }
+        
+                textarea.value = "思考中...";
+        
+                const data = {
+                    model: model,
+                    messages: [
+                        { role: "system", content: "You are a helpful assistant." },
+                        { role: "user", content: originalInput }
+                    ]
+                };
+        
+                fetch(apiUrl, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${apiKey}`
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(response => {
+                    textarea.value = response.choices[0].message.content;
+                })
+                .catch(error => {
+                    textarea.value = "思考了很久，抱歉，目前无法回答您的问题！";
+                    console.error("Error:", error);
+                });
+            }
+        });
+        </script>
