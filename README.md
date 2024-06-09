@@ -12,7 +12,7 @@
   
 - 文本正则查找替换等功能
 
-## GitHub Pages 静态站点使用限制和约束：
+## [GitHub Pages](https://desktop.github.com/) ：
 
 - GitHub Pages 不支持服务器端语言，例如 PHP、Ruby 或 Python。
 
