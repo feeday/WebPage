@@ -440,7 +440,7 @@
 
 
   
-
+ <div style="text-align:center;height:20px;">
 
     <div class="container">
         <textarea id="base64Input" placeholder="Paste Base64 data URI here..."></textarea>
@@ -452,7 +452,7 @@
         </div>
         <div class="output" id="output"></div>
     </div>
-
+</div>
     <script>
         function convertFromBase64() {
             const base64Input = document.getElementById('base64Input').value.trim();
@@ -513,75 +513,7 @@
         }
     </script>
 
-<style>
-body {
-font-family: Arial, sans-serif;
-margin: 0;
-padding: 0;
-background-color: #f4f4f4;
-}
 
-.container {
-max-width: 100%;
-padding: 20px;
-text-align: center;
-background-color: #ffffff;
-border-radius: 10px;
-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-margin: 10px;
-}
-
-#videoInput,
-#intervalInput,
-#intervalSecondsInput,
-.button,
-.button2 {
-display: block;
-margin: 10px auto;
-padding: 10px;
-width: 80%;
-border: 1px solid #ccc;
-border-radius: 5px;
-}
-
-#imageDisplayContainer {
-display: none;
-text-align: center;
-margin-bottom: 10px;
-}
-
-#displayedImage {
-max-width: 100%;
-height: auto;
-}
-
-.image-time {
-margin-top: 5px;
-font-size: 0.8em;
-color: #666;
-}
-
-.button-container {
-display: flex;
-justify-content: center;
-margin-top: 10px;
-}
-
-.button,
-.button2 {
-padding: 10px 20px;
-background-color: #007bff;
-color: #ffffff;
-border: none;
-border-radius: 5px;
-cursor: pointer;
-margin: 5px;
-}
-
-.button2 {
-display: inline-block;
-}
-</style>
 
 
 <div class="container">
