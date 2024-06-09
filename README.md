@@ -8,7 +8,7 @@ curl.exe -o NUL http://speedtest.tele2.net/10GB.zip
 curl -s -o ~/x https://raw.githubusercontent.com/olegos2/mobox/main/install && . ~/x
 ```
 
-## [Host Page](https://puck.host/page) ：
+## <a href="https://puck.host/page" target="_blank">Host Page</a>：
   
 - 常用网址分类和收藏
 
@@ -17,8 +17,8 @@ curl -s -o ~/x https://raw.githubusercontent.com/olegos2/mobox/main/install && .
 - 视频按帧率提取图片
   
 - 文本正则查找替换等功能
-
-## [GitHub Pages](https://desktop.github.com/) ：
+  
+## <a href="https://desktop.github.com" target="_blank">Host Page</a>：
 
 - GitHub Pages 不支持服务器端语言，例如 PHP、Ruby 或 Python。
 
