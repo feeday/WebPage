@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base64 Converter</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,7 +12,7 @@
             color: #333;
         }
         .container {
-            max-width: 600px;
+            width: 80%;
             margin: 0 auto;
             background: #fff;
             padding: 20px;
@@ -32,7 +33,10 @@
             box-sizing: border-box;
         }
         .button-group {
-            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
         }
         .button-group button {
             background-color: #4CAF50;
@@ -42,12 +46,16 @@
             margin: 5px;
             border-radius: 4px;
             cursor: pointer;
+            flex: 1;
+            margin-left: 5px;
+            margin-right: 5px;
         }
         .button-group button:hover {
             background-color: #45a049;
         }
-        input[type="file"] {
-            margin-bottom: 10px;
+        .button-group input[type="file"] {
+            flex: 2;
+            margin: 5px;
         }
         .output {
             margin-top: 20px;
@@ -61,14 +69,14 @@
 </head>
 <body>
     <div class="container">
+        <h1>Base64 Converter</h1>
         <textarea id="base64Input" placeholder="Paste Base64 data URI here..."></textarea>
         <div class="button-group">
-                    <input type="file" id="fileInput">
+            <input type="file" id="fileInput">
             <button onclick="convertToBase64()">文件转编码</button>
             <button onclick="convertFromBase64()">编码转文件</button>
             <button onclick="clearOutput()">清空编码</button>
         </div>
-        <hr>
         <div class="output" id="output"></div>
     </div>
 
