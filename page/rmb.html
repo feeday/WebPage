@@ -151,8 +151,15 @@
             intervalId = null; // 显式地将intervalId设置为null
         }
 
-        document.getElementById("principal").addEventListener("input", startCalculation);
-        document.getElementById("rate").addEventListener("input", startCalculation);
+        document.getElementById("principal").addEventListener("input", () => {
+            stopCalculation();
+            startCalculation();
+        });
+
+        document.getElementById("rate").addEventListener("input", () => {
+            stopCalculation();
+            startCalculation();
+        });
 
         window.onload = startCalculation;
     </script>
