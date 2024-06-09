@@ -433,11 +433,469 @@
         <iframe id="iframe" scrolling="no" src="/page/go/" frameborder="0" height="625px" width="650px"></iframe>
         <iframe id="iframe" scrolling="no" src="/page/css3-3d-rubik-cube/" frameborder="0" height="625px"
             width="510px"></iframe>
-             <iframe id="iframe" scrolling="no" src="/page/base64.html" frameborder="0" height="700px" width="750px"></iframe>
-     <iframe id="iframe" scrolling="no" src="/page/mtp.html" frameborder="0" height="700px" width="370px"></iframe>
 
     </div>
     <div style="height:20px;"></div>
+        <div style="height:20px;">
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .button-group button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+            flex: 1;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+        .button-group button:hover {
+            background-color: #45a049;
+        }
+        .button-group input[type="file"] {
+            flex: 2;
+            margin: 5px;
+        }
+        .output {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .output img, .output audio, .output video {
+            max-width: 100%;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <textarea id="base64Input" placeholder="Paste Base64 data URI here..."></textarea>
+        <div class="button-group">
+            <input type="file" id="fileInput" accept="image/*,audio/*,video/*">
+            <button onclick="convertToBase64()">文件转编码</button>
+            <button onclick="convertFromBase64()">编码转文件</button>
+            <button onclick="clearOutput()">清空编码</button>
+        </div>
+        <div class="output" id="output"></div>
+    </div>
+
+    <script>
+        function convertFromBase64() {
+            const base64Input = document.getElementById('base64Input').value.trim();
+            const output = document.getElementById('output');
+
+            if (base64Input) {
+                output.innerHTML = ''; // Clear previous output
+                const [header, base64String] = base64Input.split(',');
+                if (!header || !base64String) {
+                    alert('Invalid Base64 data URI');
+                    return;
+                }
+
+                const mimeType = header.match(/data:(.*?);base64/)[1];
+
+                if (mimeType.startsWith('image/')) {
+                    const img = document.createElement('img');
+                    img.src = base64Input;
+                    output.appendChild(img);
+                } else if (mimeType.startsWith('audio/')) {
+                    const audio = document.createElement('audio');
+                    audio.controls = true;
+                    audio.src = base64Input;
+                    output.appendChild(audio);
+                } else if (mimeType.startsWith('video/')) {
+                    const video = document.createElement('video');
+                    video.controls = true;
+                    video.src = base64Input;
+                    output.appendChild(video);
+                } else {
+                    output.textContent = 'Unsupported MIME type';
+                }
+            } else {
+                alert('Please enter a Base64 string.');
+            }
+        }
+
+        function convertToBase64() {
+            const fileInput = document.getElementById('fileInput').files[0];
+            const output = document.getElementById('output');
+
+            if (fileInput) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const base64String = event.target.result;
+                    const textArea = document.getElementById('base64Input');
+                    textArea.value = base64String;
+                };
+                reader.readAsDataURL(fileInput);
+            } else {
+                alert('Please select a file to convert.');
+            }
+        }
+
+        function clearOutput() {
+            document.getElementById('output').innerHTML = '';
+            document.getElementById('base64Input').value = '';
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" href="https://github.githubassets.com/favicons/favicon.svg">
+<title>─=≡Σ((( つ•̀ω•́)つ</title>
+
+<style>
+body {
+font-family: Arial, sans-serif;
+margin: 0;
+padding: 0;
+background-color: #f4f4f4;
+}
+
+.container {
+max-width: 100%;
+padding: 20px;
+text-align: center;
+background-color: #ffffff;
+border-radius: 10px;
+box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+margin: 10px;
+}
+
+#videoInput,
+#intervalInput,
+#intervalSecondsInput,
+.button,
+.button2 {
+display: block;
+margin: 10px auto;
+padding: 10px;
+width: 80%;
+border: 1px solid #ccc;
+border-radius: 5px;
+}
+
+#imageDisplayContainer {
+display: none;
+text-align: center;
+margin-bottom: 10px;
+}
+
+#displayedImage {
+max-width: 100%;
+height: auto;
+}
+
+.image-time {
+margin-top: 5px;
+font-size: 0.8em;
+color: #666;
+}
+
+.button-container {
+display: flex;
+justify-content: center;
+margin-top: 10px;
+}
+
+.button,
+.button2 {
+padding: 10px 20px;
+background-color: #007bff;
+color: #ffffff;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+margin: 5px;
+}
+
+.button2 {
+display: inline-block;
+}
+</style>
+
+</head>
+
+<body>
+<div class="container">
+<div id="imageDisplayContainer" class="image-display-container">
+<img id="displayedImage" src="" alt="Converted Image" onclick="showNextImage()">
+<div id="imageTimeLabel" class="image-time"></div>
+<div class="button-container">
+<button id="prevButton" class="button">上帧</button>
+<button id="returnButton" class="button">清除</button>
+<button class="button" onclick="window.open('https://xiangyuecn.github.io/Recorder/', '_blank')">录音</button>
+<button id="nextButton" class="button">下帧</button>
+</div>
+</div>
+<input type="file" id="videoInput" accept="video/*">
+<input type="number" id="intervalInput" value="1">
+<button class="button2" id="convertButton">视频转图片-每秒查看帧数</button>
+
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+var fileInput = document.getElementById('videoInput');
+var intervalInput = document.getElementById('intervalInput');
+var convertButton = document.getElementById('convertButton');
+var prevButton = document.getElementById('prevButton');
+var nextButton = document.getElementById('nextButton');
+var returnButton = document.getElementById('returnButton');
+var totalDuration;
+var video;
+var images = [];
+var currentImageIndex = -1;
+
+// 初始化按钮状态
+resetUI();
+
+// 添加事件监听器
+prevButton.addEventListener('click', showPreviousImage);
+nextButton.addEventListener('click', showNextImage);
+returnButton.addEventListener('click', resetUI);
+
+fileInput.addEventListener('change', function (e) {
+var file = e.target.files[0];
+if (!file || !file.type.startsWith('video/')) {
+alert('请选择一个视频文件。');
+return;
+}
+
+// 创建视频元素并加载选定的视频文件
+var objectURL = URL.createObjectURL(file);
+video = document.createElement('video');
+video.src = objectURL;
+video.load();
+
+video.onloadedmetadata = function () {
+// 当视频的元数据加载完成后，获取视频的总时长
+videoDuration = video.duration;
+};
+});
+
+
+convertButton.addEventListener('click', function () {
+var startTime = Date.now();
+convertToImage(startTime);
+});
+
+function convertToImage(startTime) {
+var totalFrames = 0;
+var currentTime = 0;
+var fps = parseInt(intervalInput.value, 10); // 从输入框获取帧率
+if (!video) {
+alert('请先选择一个视频文件');
+return;
+}
+
+
+
+if (isNaN(fps) || fps <= 0) {
+alert('请输入有效的视频帧率。');
+convertButton.textContent = '帧率值必须大于0'; // 重置按钮文本
+intervalInput.value = 1;
+return;
+}
+
+
+var frameDuration = 1 / fps; // 计算每帧的时间间隔（秒）
+
+function updateButtonText() {
+var totalDuration = secondsToTimeString(videoDuration); // 将总时长转换为 hh:mm:ss 格式
+convertButton.textContent = '时长: ' + totalDuration + ' / 正在转换第 ' + totalFrames + ' 帧...';
+
+}
+
+function captureFrame() {
+if (currentTime >= video.duration) {
+var totalDuration = secondsToTimeString(videoDuration); // 将总时长转换为 hh:mm:ss 格式
+
+convertButton.textContent = '用时: ' + ((Date.now() - startTime) / 1000).toFixed(2) + '秒，总帧数: ' + totalFrames;
+
+if (images.length > 0) {
+currentImageIndex = 0;
+updateImageDisplay();
+} else {
+alert('未能从视频中提取任何图片。');
+}
+return;
+}
+
+video.currentTime = currentTime;
+video.onseeked = function () {
+var canvas = document.createElement('canvas');
+canvas.width = video.videoWidth;
+canvas.height = video.videoHeight;
+var ctx = canvas.getContext('2d');
+ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+images.push({ url: canvas.toDataURL(), time: currentTime });
+
+totalFrames++;
+currentTime += frameDuration;
+updateButtonText();
+setTimeout(captureFrame, 1); // 异步调用
+};
+}
+
+captureFrame();
+}
+
+function createVideoElement(file) {
+var objectURL = URL.createObjectURL(file);
+video = document.createElement('video');
+video.src = objectURL;
+video.load();
+}
+
+function updateImageDisplay() {
+var imageContainer = document.getElementById('imageDisplayContainer');
+var displayedImage = document.getElementById('displayedImage');
+var imageTimeLabel = document.getElementById('imageTimeLabel');
+if (currentImageIndex >= 0 && currentImageIndex < images.length) {
+displayedImage.src = images[currentImageIndex].url;
+var frameNumber = currentImageIndex + 1;
+imageTimeLabel.textContent = `时长: ${secondsToTimeString(images[currentImageIndex].time)} - 第 ${frameNumber} 帧`;
+imageContainer.style.display = 'block';
+prevButton.style.display = 'inline-block';
+nextButton.style.display = 'inline-block';
+returnButton.style.display = 'inline-block';
+convertButton.style.display = 'none'; // 隐藏转换按钮
+fileInput.style.display = 'none'; // 隐藏文件输入
+intervalInput.style.display = 'none'; // 隐藏间隔输入
+}
+}
+
+function showPreviousImage() {
+if (currentImageIndex > 0) {
+currentImageIndex--;
+updateImageDisplay();
+}
+}
+
+function showNextImage() {
+if (currentImageIndex < images.length - 1) {
+currentImageIndex++;
+updateImageDisplay();
+}
+}
+
+function resetUI() {
+document.getElementById('imageDisplayContainer').style.display = 'none';
+prevButton.style.display = 'none';
+nextButton.style.display = 'none';
+returnButton.style.display = 'none';
+convertButton.textContent = '视频转图片-每秒查看帧数';
+convertButton.style.display = 'inline-block'; // 显示转换按钮
+fileInput.style.display = 'inline-block'; // 显示文件输入
+intervalInput.style.display = 'inline-block'; // 显示间隔输入
+images = [];
+currentImageIndex = -1;
+}
+
+function secondsToTimeString(seconds) {
+var hours = Math.floor(seconds / 3600);
+var minutes = Math.floor((seconds % 3600) / 60);
+var remainingSeconds = Math.floor(seconds % 60);
+return `${padZero(hours)}:${padZero(minutes)}:${padZero(remainingSeconds)}`;
+}
+
+function padZero(number) {
+return number < 10 ? '0' + number : number.toString();
+}
+});
+</script>
+<script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+<script>LA.init({ id: "JRHGRBPWC7lJIaXq", ck: "JRHGRBPWC7lJIaXq" })</script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+        </div>
 
     <!-- #content -->
     <footer id="colophon" class="site-footer" role="contentinfo">
