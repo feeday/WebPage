@@ -1,8 +1,8 @@
-## Puck Host ：
+## [Bash Host](https://puck.host) ：
   
 - 服务器部署脚本
 
-## Puck Page ：
+## [Host Page](https://puck.host/page) ：
   
 - 常用网址分类和收藏
 
