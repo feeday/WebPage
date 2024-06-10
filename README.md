@@ -55,6 +55,51 @@ for (var a of document.getElementsByTagName('a')) { console.log(a.href) }
 - <a href="https://www.anaconda.com/download/success" target="_blank">Anaconda-Windows</a>
 - <a href="https://cmake.org/download/" target="_blank">CMake-Windows</a>
 
+
+## huggingface spaces
+```
+import gradio as gr
+from transformers import pipeline
+import pyperclip
+
+# 加载翻译模型
+zh_en_translator = pipeline("translation", model="Helsinki-NLP/opus-mt-zh-en")
+en_zh_translator = pipeline("translation", model="Helsinki-NLP/opus-mt-en-zh")
+
+def translate_zh_to_en(text):
+    translation = zh_en_translator(text, src_lang="zh", tgt_lang="en")
+    return translation[0]['translation_text']
+
+def translate_en_to_zh(text):
+    translation = en_zh_translator(text, src_lang="en", tgt_lang="zh")
+    return translation[0]['translation_text']
+
+with gr.Blocks() as demo:
+    input_text = gr.Textbox(lines=2, placeholder="Enter text here...", label="Input Text")
+    output_text = gr.Textbox(lines=2, label="Translated Text")
+    
+    with gr.Row():
+        zh_to_en_button = gr.Button("Chinese to English")
+        en_to_zh_button = gr.Button("English to Chinese")
+
+    zh_to_en_button.click(translate_zh_to_en, inputs=input_text, outputs=output_text)
+    en_to_zh_button.click(translate_en_to_zh, inputs=input_text, outputs=output_text)
+
+demo.launch()
+
+```
+
+```
+transformers
+torch
+gradio
+pyperclip
+sentencepiece
+
+```
+
+
+
 ### 检测人脸双击鼠标
 ```
 import cv2
