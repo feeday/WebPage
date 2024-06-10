@@ -3,12 +3,12 @@
 - 服务器部署脚本
 
 ```
-curl https://puck.host/sh/puck.sh -O
+curl https://feeday.cn/sh/puck.sh -O
 curl.exe -o NUL http://speedtest.tele2.net/10GB.zip
 curl -s -o ~/x https://raw.githubusercontent.com/olegos2/mobox/main/install && . ~/x
 ```
 
-## <a href="https://puck.host/page" target="_blank">Host Page</a>：
+## <a href="https://feeday.cn/page" target="_blank">Host Page</a>：
   
 - 常用网址分类和收藏
 
