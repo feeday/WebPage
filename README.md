@@ -57,6 +57,8 @@ for (var a of document.getElementsByTagName('a')) { console.log(a.href) }
 
 
 ## huggingface spaces
+
+### app.py
 ```
 import gradio as gr
 from transformers import pipeline
@@ -88,14 +90,13 @@ with gr.Blocks() as demo:
 demo.launch()
 
 ```
-
+### requirements.txt
 ```
 transformers
 torch
 gradio
 pyperclip
 sentencepiece
-
 ```
 
 
