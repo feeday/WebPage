@@ -64,16 +64,15 @@ import gradio as gr
 from transformers import pipeline
 import pyperclip
 
-# 加载翻译模型
 zh_en_translator = pipeline("translation", model="Helsinki-NLP/opus-mt-zh-en")
 en_zh_translator = pipeline("translation", model="Helsinki-NLP/opus-mt-en-zh")
 
 def translate_zh_to_en(text):
-    translation = zh_en_translator(text, src_lang="zh", tgt_lang="en")
+    translation = zh_en_translator(text)
     return translation[0]['translation_text']
 
 def translate_en_to_zh(text):
-    translation = en_zh_translator(text, src_lang="en", tgt_lang="zh")
+    translation = en_zh_translator(text)
     return translation[0]['translation_text']
 
 with gr.Blocks() as demo:
@@ -88,7 +87,6 @@ with gr.Blocks() as demo:
     en_to_zh_button.click(translate_en_to_zh, inputs=input_text, outputs=output_text)
 
 demo.launch()
-
 ```
 ### requirements.txt
 ```
