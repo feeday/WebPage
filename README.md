@@ -1,13 +1,3 @@
-## [Bash Host](https://feeday.cn) ：
-  
-- 服务器部署脚本
-
-```
-curl https://feeday.cn/sh/puck.sh -O
-curl.exe -o NUL http://speedtest.tele2.net/10GB.zip
-curl -s -o ~/x https://raw.githubusercontent.com/olegos2/mobox/main/install && . ~/x
-```
-
 ## <a href="https://feeday.cn/page" target="_blank">Host Page</a>：
   
 - 常用网址分类和收藏
@@ -41,6 +31,9 @@ curl -s -o ~/x https://raw.githubusercontent.com/olegos2/mobox/main/install && .
 ## HTML TOOLS CODE
   
 ```
+curl https://feeday.cn/sh/puck.sh -O
+curl.exe -o NUL http://speedtest.tele2.net/10GB.zip
+curl -s -o ~/x https://raw.githubusercontent.com/olegos2/mobox/main/install && . ~/x
 for (var a of document.getElementsByTagName('a')) { console.log(a.href) }
 ```
 ## <a href="https://code.visualstudio.com/Download" target="_blank">Visual Studio Code Python</a>：
