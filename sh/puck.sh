@@ -210,7 +210,7 @@ case $cof in
 			        if [ -f /usr/bin/curl ];then curl -sSO https://download.bt.cn/install/install_panel.sh;else wget -O install_panel.sh https://download.bt.cn/install/install_panel.sh;fi;bash install_panel.sh ed8484bec
 			;;
       			6)
-			        curl -Lso- https://puck.host/sh/ts.sh | bash
+			        curl -Lso- https://feeday.cn/sh/ts.sh | bash
 			;;
 
 			q)
@@ -223,7 +223,7 @@ case $cof in
            esac    
 	;;    
 	2)
-		curl -Lso- https://puck.host/sh/host.sh | bash
+		curl -Lso- https://feeday.cn/sh/host.sh | bash
 	;;
 	3)
 		ips 
@@ -232,7 +232,7 @@ case $cof in
 		INSTALL_AGENT=1 INIT_SWAPFILE=1 bash -c "$(curl -sS http://dl.appnode.com/install.sh)"
    	;;	 
 	5)
-		bash -c "$(curl -sS https://puck.host/sh/mcs.sh)" 
+		bash -c "$(curl -sS https://feeday.cn/sh/mcs.sh)" 
 	;;
 	6)
 		yum install nmap
