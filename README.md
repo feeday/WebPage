@@ -36,6 +36,7 @@ curl.exe -o NUL http://speedtest.tele2.net/10GB.zip
 curl -s -o ~/x https://raw.githubusercontent.com/olegos2/mobox/main/install && . ~/x
 for (var a of document.getElementsByTagName('a')) { console.log(a.href) }
 ```
+
 ## <a href="https://code.visualstudio.com/Download" target="_blank">Visual Studio Code Python</a>：
 
 - <a href="https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-zh-hans" target="_blank">Chinese Language-Visual Studio Code</a>
