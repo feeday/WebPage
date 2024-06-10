@@ -1,4 +1,4 @@
-## [Bash Host](https://puck.host) ：
+## [Bash Host](https://feeday.cn) ：
   
 - 服务器部署脚本
 
