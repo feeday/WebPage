@@ -1,4 +1,4 @@
-## <a href="https://feeday.cn/page" target="_blank">Host Page</a>：
+## <a href="https://feeday.cn/page" target="_blank">Feeday Page</a>：
   
 - 常用网址分类和收藏
 
@@ -14,7 +14,7 @@
 
 - 中文和英文翻译调用抱脸模型 
   
-## <a href="https://desktop.github.com" target="_blank">Host Page</a>：
+## <a href="https://desktop.github.com" target="_blank">Github Page</a>：
 
 - GitHub Pages 不支持服务器端语言，例如 PHP、Ruby 或 Python。
 
