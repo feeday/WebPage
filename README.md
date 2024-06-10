@@ -51,6 +51,7 @@ for (var a of document.getElementsByTagName('a')) { console.log(a.href) }
 - <a href="https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-zh-hans" target="_blank">Chinese Language-Visual Studio Code</a>
 - <a href="https://marketplace.visualstudio.com/items?itemName=FittenTech.Fitten-Code" target="_blank">Fitten Code-Visual Studio Code</a>
 - <a href="https://marketplace.visualstudio.com/items?itemName=donjayamanne.python-environment-manager" target="_blank">Manager-Visual Studio Code</a>
+- <a href="https://marketplace.visualstudio.com/items?itemName=ms-python.python" target="_blank">Python-Visual Studio Code</a>
 - <a href="https://www.anaconda.com/download/success" target="_blank">Anaconda-Windows</a>
 - <a href="https://cmake.org/download/" target="_blank">CMake-Windows</a>
 
