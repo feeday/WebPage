@@ -13,6 +13,7 @@
 ## Shortcut Keys
 
 ```
+Ctrl+K+Ctrl+S # Visual Studio Code 查看所有快捷鍵
 Shift+Alt+F # Visual Studio Code 格式化文档
 
 Ctrl+E # WPS Excel 合并拆分数据
