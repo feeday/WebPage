@@ -10,6 +10,13 @@
 
 - 创建的网页总容量限制为 1 GB内、每月 100 GB流量。
 
+## Shortcut Keys
+
+```
+Shift+Alt+F # Visual Studio Code 格式化文档
+Ctrl+E # WPS Excel 合并拆分数据
+```
+
 ## HTML TOOLS CODE
   
 ```
