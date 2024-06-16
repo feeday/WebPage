@@ -14,7 +14,11 @@
 
 ```
 Shift+Alt+F # Visual Studio Code 格式化文档
+
 Ctrl+E # WPS Excel 合并拆分数据
+Alt+等于号 # WPS Excel 求和
+Ctrl+Shift+加号 # 插入列或行
+Ctrl+方向键 # 跳转到行列的首尾
 ```
 
 ## HTML TOOLS CODE
