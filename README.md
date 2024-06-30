@@ -1,4 +1,4 @@
-## <a href="https://github.com/feeday/WebPage/edit/main/README.md" target="_blank">常用代码编辑添加</a>
+## <a href="https://github.com/feeday/WebPage/edit/main/README.md" target="_blank">Code Editing Adding</a>
 - [x]  网址分类收藏、围棋魔方小游戏
 - [x]  收益利率计算、文本正则查找替换
 - [x]  网易音乐播放器、倒计时正计时功能
