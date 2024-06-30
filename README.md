@@ -1,3 +1,4 @@
+## <a href="https://github.com/feeday/WebPage/edit/main/README.md" target="_blank">常用代码编辑添加</a>
 - [x]  网址分类收藏、围棋魔方小游戏
 - [x]  收益利率计算、文本正则查找替换
 - [x]  网易音乐播放器、倒计时正计时功能
@@ -6,7 +7,7 @@
 - [ ]  代办代码优化整理优化删减重复引用代码 
 - [ ]  暂时还没有想到这个是占位专用的显示区
 
-## <a href="https://github.com/feeday/WebPage/edit/main/README.md" target="_blank">常用代码编辑添加</a>
+
 
 ## Shortcut Keys
 
