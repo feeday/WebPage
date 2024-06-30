@@ -16,14 +16,17 @@ font-family: Arial, sans-serif;
 color: #fff;
 transition: background 0.5s;
 }
-.start {
+.countdown {
+background: linear-gradient(145deg, #ff4b1f, #ff9068);
+}
+.timer {
 background: linear-gradient(145deg, #1e3c72, #2a5298);
 }
 .pause {
 background: linear-gradient(145deg, #ffcc00, #ffdd55);
 }
 .stop {
-background: linear-gradient(145deg, #ff4b1f, #ff9068);
+background: linear-gradient(145deg, #000000, #555555);
 }
 .container {
 text-align: center;
@@ -89,6 +92,15 @@ background-color: #f08080; /* Light red */
 #startCountdownButton:active {
 background-color: #cd5c5c; /* Indian red */
 }
+#startTimerButton {
+background-color: #a9a9a9; /* Dark gray */
+}
+#startTimerButton:hover {
+background-color: #f08080; /* Light red */
+}
+#startTimerButton:active {
+background-color: #cd5c5c; /* Indian red */
+}
 #pauseButton {
 background-color: #d3d3d3; /* Light gray */
 }
@@ -107,15 +119,6 @@ background-color: #90ee90; /* Light green */
 #stopButton:active {
 background-color: #32cd32; /* Lime green */
 }
-#toggleSoundButton {
-background-color: #d3d3d3; /* Light gray */
-}
-#toggleSoundButton:hover {
-background-color: #90ee90; /* Light green */
-}
-#toggleSoundButton:active {
-background-color: #32cd32; /* Lime green */
-}
 </style>
 </head>
 <body>
@@ -128,14 +131,14 @@ background-color: #32cd32; /* Lime green */
 </div>
 <div class="input-row">
 <input type="number" id="hours" placeholder="HH" min="0" max="23">
-<input type="number" id="minutes" placeholder="MM" min="0" max="59">
+<input type="number" id="minutes" placeholder="MM" min="0" max="59" value="15">
 <input type="number" id="seconds" placeholder="SS" min="0" max="59">
 </div>
 <div class="button-row">
 <button id="startCountdownButton" onclick="startCountdown()">Start Countdown</button>
+<button id="startTimerButton" onclick="startTimer()">Start Timer</button>
 <button id="pauseButton" onclick="pauseTimer()" disabled>Pause</button>
 <button id="stopButton" onclick="stopTimer()" disabled>Stop</button>
-<button id="toggleSoundButton" onclick="toggleSound()">Sound On</button>
 </div>
 <div id="timeDisplay">00:00:00:000</div>
 </div>
@@ -146,7 +149,6 @@ let startTime;
 let remainingTime;
 let isCountdown = false;
 let isPaused = false;
-let soundOn = true;
 
 const timeDisplay = document.getElementById('timeDisplay');
 const alertSound = document.getElementById('alertSound');
@@ -168,7 +170,7 @@ alert('Please set a valid time for countdown.');
 return;
 }
 
-document.body.className = 'start';
+document.body.className = 'countdown';
 const totalMilliseconds = (hours * 3600 + minutes * 60 + seconds) * 1000;
 
 if (totalMilliseconds > 0) {
@@ -176,6 +178,7 @@ isCountdown = true;
 endTime = Date.now() + totalMilliseconds;
 timer = setInterval(updateTime, 10);  // Update every 10ms to reduce flickering
 document.getElementById('startCountdownButton').disabled = true;
+document.getElementById('startTimerButton').disabled = false;
 document.getElementById('pauseButton').disabled = false;
 document.getElementById('stopButton').disabled = false;
 }
@@ -185,16 +188,13 @@ function startTimer() {
 if (timer) {
 clearInterval(timer);
 }
-document.body.className = 'start';
-if (!isPaused) {
+document.body.className = 'timer';
 startTime = Date.now();
-} else {
-startTime = Date.now() - (remainingTime || 0);
 isPaused = false;
-}
 isCountdown = false;
 timer = setInterval(updateTime, 10);  // Update every 10ms to reduce flickering
 document.getElementById('startCountdownButton').disabled = false;
+document.getElementById('startTimerButton').disabled = true;
 document.getElementById('pauseButton').disabled = false;
 document.getElementById('stopButton').disabled = false;
 }
@@ -213,7 +213,7 @@ document.getElementById('pauseButton').onclick = resumeTimer;
 }
 
 function resumeTimer() {
-document.body.className = 'start';
+document.body.className = isCountdown ? 'countdown' : 'timer';
 if (isCountdown) {
 endTime = Date.now() + remainingTime;
 } else {
@@ -230,7 +230,6 @@ document.body.className = 'stop';
 clearInterval(timer);
 timeDisplay.innerHTML = '00:00:00:000';
 resetButtons();
-startTimer();
 }
 
 function updateTime() {
@@ -240,10 +239,9 @@ if (isCountdown) {
 remaining = endTime - currentTime;
 if (remaining <= 0) {
 clearInterval(timer);
-if (soundOn) alertSound.play();
-timeDisplay.innerHTML = '00:00:00:000';
+alertSound.play();
 resetButtons();
-startTimer();
+timeDisplay.innerHTML = '00:00:00:000';
 return;
 }
 } else {
@@ -266,6 +264,7 @@ return number.toString().padStart(length, '0');
 
 function resetButtons() {
 document.getElementById('startCountdownButton').disabled = false;
+document.getElementById('startTimerButton').disabled = false;
 document.getElementById('pauseButton').disabled = true;
 document.getElementById('stopButton').disabled = true;
 document.getElementById('pauseButton').innerText = "Pause";
@@ -274,11 +273,6 @@ document.body.className = '';
 isPaused = false;
 remainingTime = 0;
 timer = null;
-}
-
-function toggleSound() {
-soundOn = !soundOn;
-document.getElementById('toggleSoundButton').innerText = soundOn ? "Sound On" : "Sound Off";
 }
 </script>
 </body>
