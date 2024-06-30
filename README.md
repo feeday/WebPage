@@ -6,6 +6,8 @@
 - [ ]  代办代码优化整理优化删减重复引用代码 
 - [ ]  暂时还没有想到这个是占位专用的显示区
 
+## <a href="https://github.com/feeday/WebPage/edit/main/README.md" target="_blank">常用代码编辑添加</a>
+
 ## Shortcut Keys
 
 ```
