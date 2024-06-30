@@ -137,6 +137,7 @@ background-color: var(--stop-color);
 <source src="/page/wav/ear0.wav" type="audio/mpeg">
 </audio>
 <div class="container">
+  <div id="timeDisplay">00:00:00:00</div>
 <div class="iframe-row">
 <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="110" src="//music.163.com/outchain/player?type=0&id=12245798653&auto=1&height=90"></iframe>
 </div>
@@ -151,7 +152,7 @@ background-color: var(--stop-color);
 <button id="pauseButton" onclick="pauseTimer()" disabled>Pause</button>
 <button id="stopButton" onclick="stopTimer()" disabled>Stop</button>
 </div>
-<div id="timeDisplay">00:00:00:00</div>
+
 </div>
 <script>
 let timer;
